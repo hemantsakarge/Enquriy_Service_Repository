@@ -24,15 +24,14 @@ public class EnquiryController {
 
 	@Autowired
 	private EnquiryService enquiryService;
-	@Autowired
-	CibilService cibilService;
 
-	@PostMapping("/saveenquiry")
+	@Autowired
+	private	CibilService cibilService;
+
+	@PostMapping("/save_enquiry")
 	public ResponseEntity<Enquiry> onEnqury(@RequestBody Enquiry e) {
 		enquiryService.saveEnquiry(e);
-
 		return new ResponseEntity<Enquiry>(e, HttpStatus.CREATED);
-
 	}
 
 	@GetMapping("/getenquirybyenquiryId/{customerID}")
@@ -45,17 +44,14 @@ public class EnquiryController {
 	@GetMapping("/getAllEnquiry")
 	public ResponseEntity<List<Enquiry>> onGetAllEnquiry() {
 		List<Enquiry> allEnquiries = enquiryService.findALL();
-
 		return new ResponseEntity<List<Enquiry>>(allEnquiries, HttpStatus.OK);
 
 	}
 
 	@PutMapping("/updateCibilScore/{customerID}")
-	public ResponseEntity<Enquiry> updateCibilScoreby(@PathVariable("customerID") int customerID) {
+	public ResponseEntity<Enquiry> updateCibilScore(@PathVariable("customerID") int customerID) {
 
 		Enquiry enquiry = enquiryService.updateCibilScore(customerID);
-
-
 		return new ResponseEntity<Enquiry>(enquiry, HttpStatus.OK);
 	}
 
