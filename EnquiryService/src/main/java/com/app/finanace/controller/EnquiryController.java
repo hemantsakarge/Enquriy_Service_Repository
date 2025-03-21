@@ -29,7 +29,7 @@ public class EnquiryController {
 	@Autowired
 	private	CibilService cibilService;
 
-	@PostMapping("/save_enquiry")
+	@PostMapping("/saveenquiry")
 	public ResponseEntity<Enquiry> onEnqury(@RequestBody Enquiry e) {
 		enquiryService.saveEnquiry(e);
 		return new ResponseEntity<Enquiry>(e, HttpStatus.CREATED);

@@ -7,6 +7,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import com.app.finanace.exceptions.EnquiryObjectNotFoundException;
 import com.app.finanace.model.Enquiry;
 import com.app.finanace.model.Enums;
 import com.app.finanace.repository.EnquiryRepository;
@@ -38,7 +39,14 @@ public class EnquiryServiceImpl implements EnquiryService {
 	public Enquiry findByCustomerID(int customerID) {
 
 		Enquiry enquiry = enquiryRepository.findByCustomerID(customerID);
-		return enquiry;
+		if(enquiry==null) {
+			throw new EnquiryObjectNotFoundException("The Enquiry for "+customerID+ " Not Found");
+		}
+		else
+		{
+			return enquiry;	
+		}
+		
 	}
 
 	@Override
@@ -71,29 +79,54 @@ public class EnquiryServiceImpl implements EnquiryService {
 	public Enquiry updateFirstName(String firstName, int customerID) {
 		enquiryRepository.updateFirstName(firstName, customerID);
 		Enquiry enquiry=enquiryRepository.findByCustomerID(customerID);
-		return enquiry;
 		
+		if(enquiry==null) {
+			throw new EnquiryObjectNotFoundException("The Enquiry for "+customerID+"Not Found");
+		}
+		else
+		{
+			return enquiry;	
+		}
 	}
 
 	@Override
 	public Enquiry updateLastName(String lastName, int customerID) {
 		enquiryRepository.updateLastName(lastName, customerID);
 		Enquiry enquiry=enquiryRepository.findByCustomerID(customerID);
-		return enquiry;
+		if(enquiry==null) {
+			throw new EnquiryObjectNotFoundException("The Enquiry for "+customerID+"Not Found");
+		}
+		else
+		{
+			return enquiry;	
+		}
 	}
 
 	@Override
 	public Enquiry updateEmail(String email, int customerID) {
 		enquiryRepository.updateEmail(email, customerID);
 		Enquiry enquiry=enquiryRepository.findByCustomerID(customerID);
-		return enquiry;
+		
+		if(enquiry==null) {
+			throw new EnquiryObjectNotFoundException("The Enquiry for "+customerID+"Not Found");
+		}
+		else
+		{
+			return enquiry;	
+		}
 	}
 
 	@Override
 	public Enquiry updateMobileNo(long mobileNo, int customerID) {
 		enquiryRepository.updateMobileNo(mobileNo, customerID);
 		Enquiry enquiry=enquiryRepository.findByCustomerID(customerID);
-		return enquiry;
+		if(enquiry==null) {
+			throw new EnquiryObjectNotFoundException("The Enquiry for "+customerID+"Not Found");
+		}
+		else
+		{
+			return enquiry;	
+		}
 	}
 
 	
