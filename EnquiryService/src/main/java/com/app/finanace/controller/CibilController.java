@@ -1,6 +1,7 @@
 package com.app.finanace.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -56,5 +57,16 @@ public class CibilController {
 
 		return new ResponseEntity<Cibil>(cibil, org.springframework.http.HttpStatus.CREATED);
 	}
+	@GetMapping("/getAllCibil")
+	public ResponseEntity<List<Cibil>> getAllcibil()
+	{
+		
+		List<Cibil> cibil = cibilService.findAllCibil();
+		return new ResponseEntity<List<Cibil>>(cibil,HttpStatus.OK);
+		
+		
+	}
+	
+	
 	
 }

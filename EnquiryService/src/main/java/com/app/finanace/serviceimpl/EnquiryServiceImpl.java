@@ -3,6 +3,7 @@ package com.app.finanace.serviceimpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,10 @@ public class EnquiryServiceImpl implements EnquiryService {
 	@Autowired
 	EnquiryRepository enquiryRepository;
 
+	
+	@Value("${spring.mail.username}")
+	private String fromMail;
+	
 	@Autowired
 	JavaMailSender sender;
 
@@ -26,10 +31,21 @@ public class EnquiryServiceImpl implements EnquiryService {
 	public void saveEnquiry(Enquiry e) {
 		
 		SimpleMailMessage mail = new SimpleMailMessage();
-		mail.setFrom("hemantsakarge@gmail.com");
+		mail.setFrom(fromMail);
 		mail.setTo(e.getEmail());
-		mail.setText("welcome to cjc");
-		mail.setSubject("about enquiry");
+		
+	String text =
+	             "Dear"+ e.getFirstName() +" "+e.getLastName()+"\n\n"
+	            + "Thank you for reaching out to us. We’ve received your inquiry and our team is currently reviewing it. "
+	            + "We will get back to you as soon as possible with more details or a solution to your request.\n\n"
+	            + "If you have any additional information or questions, feel free to reply to this email or contact us directly at "
+	           
+	            + "We appreciate your interest in our services/products and look forward to assisting you!\n\n"
+	            + "Best regards,\n"
+	            + fromMail;
+		
+		mail.setText(text);
+		mail.setSubject(" Thank You for Your Inquiry – ");
 
 		enquiryRepository.save(e);
 		sender.send(mail);
@@ -63,7 +79,7 @@ public class EnquiryServiceImpl implements EnquiryService {
 		int cibilCheck = CibilServiceImpl.checkCibilScore();
 		enquiry.getCibil().setCibilScore(cibilCheck);
 
-		if (cibilCheck >= 700)
+		if (cibilCheck >= 600)
 			enquiry.getCibil().setCibilStatus(Enums.accept);
 		else
 			enquiry.getCibil().setCibilStatus(Enums.reject);

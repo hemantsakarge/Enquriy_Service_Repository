@@ -1,5 +1,6 @@
 package com.app.finanace.serviceimpl;
 
+import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,13 @@ public class CibilServiceImpl  implements CibilService{
 	public Cibil findByCibilId(int cibilId) {
 		
 		return cibilRepository.findByCibilId(cibilId);
+	}
+
+
+	@Override
+	public List<Cibil> findAllCibil() {
+		
+		return cibilRepository.findAll();
 	}
 	
 
