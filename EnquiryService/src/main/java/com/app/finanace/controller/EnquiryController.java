@@ -83,7 +83,6 @@ public class EnquiryController {
 	public ResponseEntity<Enquiry> onUpdateEnquiryMobileno(@RequestBody Enquiry e,@PathVariable("customerID")int customerID){
 		Enquiry updateMobileNo = enquiryService.updateMobileNo(e.getMobileNo(), customerID);
 		enquiryService.saveEnquiry(updateMobileNo);
-		
 		return new ResponseEntity<Enquiry>(updateMobileNo,HttpStatus.OK);
 	}
 	
