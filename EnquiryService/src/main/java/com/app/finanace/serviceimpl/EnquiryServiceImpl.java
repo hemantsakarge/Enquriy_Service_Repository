@@ -23,7 +23,7 @@ public class EnquiryServiceImpl implements EnquiryService {
 
 	@Override
 	public void saveEnquiry(Enquiry e) {
-
+		
 		SimpleMailMessage mail = new SimpleMailMessage();
 		mail.setFrom("hemantsakarge@gmail.com");
 		mail.setTo(e.getEmail());
@@ -66,5 +66,38 @@ public class EnquiryServiceImpl implements EnquiryService {
 		return enquiry;
 
 	}
+
+	@Override
+	public Enquiry updateFirstName(String firstName, int customerID) {
+		enquiryRepository.updateFirstName(firstName, customerID);
+		Enquiry enquiry=enquiryRepository.findByCustomerID(customerID);
+		return enquiry;
+		
+	}
+
+	@Override
+	public Enquiry updateLastName(String lastName, int customerID) {
+		enquiryRepository.updateLastName(lastName, customerID);
+		Enquiry enquiry=enquiryRepository.findByCustomerID(customerID);
+		return enquiry;
+	}
+
+	@Override
+	public Enquiry updateEmail(String email, int customerID) {
+		enquiryRepository.updateEmail(email, customerID);
+		Enquiry enquiry=enquiryRepository.findByCustomerID(customerID);
+		return enquiry;
+	}
+
+	@Override
+	public Enquiry updateMobileNo(long mobileNo, int customerID) {
+		enquiryRepository.updateMobileNo(mobileNo, customerID);
+		Enquiry enquiry=enquiryRepository.findByCustomerID(customerID);
+		return enquiry;
+	}
+
+	
+
+	
 
 }
