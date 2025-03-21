@@ -14,4 +14,13 @@ public List<Enquiry> findALL();
 
 public Enquiry updateCibilScore(int customerID);
 
+public Enquiry updateFirstName(String firstName,int customerID);
+
+public Enquiry updateLastName(String lastName,int customerID);
+
+public Enquiry updateEmail(String email,int customerID);
+
+public Enquiry updateMobileNo(long mobileNo,int customerID);
+
+
 }
